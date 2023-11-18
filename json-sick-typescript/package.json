@@ -1,0 +1,66 @@
+{
+	"name": "json-sick-typescript",
+	"version": "0.0.0",
+	"description": "SICK: Streams of Independent Constant Keys",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/7mind/sick"
+	},
+	"license": "MIT",
+	"author": {
+		"email": "328805+theodesp@users.noreply.github.com"
+	},
+	"exports": {
+		"import": "./lib/index.mjs",
+		"require": "./lib/index.js",
+		"default": "./lib/index.mjs"
+	},
+	"main": "./lib/index.js",
+	"files": [
+		"lib/",
+		"package.json",
+		"README.md",
+		"src",
+		"!**/*.test.*",
+		"!**/test*"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"format": "prettier \"**/*\" --ignore-unknown",
+		"lint": "eslint . .*js --max-warnings 0 --report-unused-disable-directives",
+		"prepare": "husky install",
+		"test": "vitest",
+		"tsc": "tsc"
+	},
+	"lint-staged": {
+		"*": "prettier --ignore-unknown --write"
+	},
+	"devDependencies": {
+		"@types/eslint": "^8.44.7",
+		"@typescript-eslint/eslint-plugin": "^6.11.0",
+		"@typescript-eslint/parser": "^6.11.0",
+		"eslint": "^8.53.0",
+		"eslint-plugin-deprecation": "^2.0.0",
+		"eslint-plugin-eslint-comments": "^3.2.0",
+		"eslint-plugin-jsdoc": "^46.9.0",
+		"eslint-plugin-n": "^16.3.1",
+		"eslint-plugin-perfectionist": "^2.4.0",
+		"eslint-plugin-regexp": "^2.1.1",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.1.0",
+		"prettier": "^3.1.0",
+		"prettier-plugin-curly": "^0.1.3",
+		"prettier-plugin-packagejson": "^2.4.6",
+		"tsup": "^7.3.0",
+		"typescript": "^5.2.2",
+		"vitest": "^0.34.6"
+	},
+	"packageManager": "pnpm@8.7.0",
+	"engines": {
+		"node": ">=18"
+	},
+	"publishConfig": {
+		"provenance": true
+	}
+}
