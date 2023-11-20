@@ -8,7 +8,7 @@ export class Bijection<V> {
 		private readonly counters = new Map<number, number>(),
 	) {}
 
-	add(value: V): number {
+	add(value: V) {
 		if (this.reverse.has(value)) {
 			const ret = this.reverse.get(value)!;
 			this.counters.set(ret, this.counters.get(ret)! + 1);
@@ -22,26 +22,26 @@ export class Bijection<V> {
 		return idx;
 	}
 
-	freq(key: number): number {
+	freq(key: number) {
 		return this.counters.get(key)!;
 	}
 
-	fromList(content: [idx: number, value: V, freq: number][]): Bijection<V> {
+	fromList(content: [idx: number, value: V, freq: number][]) {
 		const data = content.map((v) => [v[0], v[1]] as const);
 		const revData = content.map((v) => [v[1], v[0]] as const);
 		const freq = content.map((v) => [v[0], v[2]] as const);
 		return new Bijection(new Map(data), new Map(revData), new Map(freq));
 	}
 
-	get(key: number): V | undefined {
+	get(key: number) {
 		return this.forward.get(key);
 	}
 
-	reverseGet(value: V): number | undefined {
+	reverseGet(value: V) {
 		return this.reverse.get(value);
 	}
 
-	rewriteMap(mapper: <T>(src: T) => T): Bijection<V> {
+	rewriteMap(mapper: (src: V) => V) {
 		const newRev = Array.from(this.reverse.entries()).map((v) => {
 			return [mapper(v[0]), v[1]] as const;
 		});
@@ -56,11 +56,21 @@ export class Bijection<V> {
 		);
 	}
 
-	get isEmpty(): boolean {
+	get isEmpty() {
 		return this.forward.size > 0;
 	}
 
-	get size(): number {
+	get size() {
 		return this.forward.size;
+	}
+
+	all() {
+		const entries = this.reverse.entries();
+		const result = [] as unknown as [[number, [V, number]]];
+		for (let entry of entries) {
+			const [v, k] = entry;
+			result.push([k, [v, this.counters.get(k)!]])
+		}
+		return new Map<number, [V, number]>(result);
 	}
 }
