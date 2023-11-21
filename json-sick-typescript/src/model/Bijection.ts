@@ -22,6 +22,16 @@ export class Bijection<V> {
 		return idx;
 	}
 
+	all() {
+		const entries = this.reverse.entries();
+		const result = [] as unknown as [[number, [V, number]]];
+		for (const entry of entries) {
+			const [v, k] = entry;
+			result.push([k, [v, this.counters.get(k)!]])
+		}
+		return new Map<number, [V, number]>(result);
+	}
+
 	freq(key: number) {
 		return this.counters.get(key)!;
 	}
@@ -62,15 +72,5 @@ export class Bijection<V> {
 
 	get size() {
 		return this.forward.size;
-	}
-
-	all() {
-		const entries = this.reverse.entries();
-		const result = [] as unknown as [[number, [V, number]]];
-		for (let entry of entries) {
-			const [v, k] = entry;
-			result.push([k, [v, this.counters.get(k)!]])
-		}
-		return new Map<number, [V, number]>(result);
 	}
 }
