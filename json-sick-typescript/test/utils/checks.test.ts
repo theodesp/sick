@@ -1,4 +1,4 @@
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import { isPlainObject } from "../../src/utils/checks.js";
 

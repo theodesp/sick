@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { Bijection } from "../../src/model/Bijection.js";
 
@@ -12,25 +12,25 @@ describe("Bijection<V>", () => {
             expect.assertions(3);
 
             expect(sut.freq(1)).toBe(undefined);
-            expect(sut.isEmpty).toBeTruthy;
+            expect(sut.isEmpty).toBeTruthy();
             expect(sut.size).toBe(0);
         })
         test('adds new value and updates counters', () => {
-            let key = sut.add(10);
+            const key = sut.add(10);
             expect.assertions(3);
 
             expect(sut.freq(key)).toBe(1);
-            expect(sut.isEmpty).toBeFalsy;
+            expect(sut.isEmpty).toBeFalsy();
             expect(sut.size).toBe(1);
         })
         test('returns existing value and updates counters', () => {
-            let first = sut.add(10);
-            let second = sut.add(10);
+            const first = sut.add(10);
+            const second = sut.add(10);
             expect.assertions(4);
 
             expect(sut.freq(first)).toBe(2);
             expect(sut.freq(second)).toBe(2);
-            expect(sut.isEmpty).toBeFalsy;
+            expect(sut.isEmpty).toBeFalsy();
             expect(sut.size).toBe(1);
         })
     });
@@ -46,7 +46,7 @@ describe("Bijection<V>", () => {
 
             expect(sut.freq(content[0][0])).toBe(1);
             expect(sut.freq(content[1][0])).toBe(2);
-            expect(sut.isEmpty).toBeFalsy;
+            expect(sut.isEmpty).toBeFalsy();
             expect(sut.size).toBe(2);
         })
     })
@@ -73,7 +73,7 @@ describe("Bijection<V>", () => {
             expect(sut.reverseGet(sut.get(first) as number)).toBe(first);
             expect(sut.reverseGet(sut.get(second) as number)).toBe(second);
             expect(sut.reverseGet(sut.get(third) as number)).toBe(third);
-            expect(sut.isEmpty).toBeFalsy;
+            expect(sut.isEmpty).toBeFalsy();
             expect(sut.size).toBe(3);
         })
         

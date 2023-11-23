@@ -1,50 +1,85 @@
-export type NonMappable = "NonMappable";
-export type Mappable = "Mappable";
-
-export type SickRefKind = Mappable | NonMappable;
-export type MakeRefType<T extends SickRefKind, N extends number> = {
-	kind: T,
-	value: N
+export type TNul = {
+	kind: 0,
+	value: number
+}
+export type TBit = {
+	kind: 1,
+	value: number
 }
 
-export type TNul = MakeRefType<NonMappable, 0>;
-export type TBit = MakeRefType<NonMappable, 1>;
-export type TByte = MakeRefType<NonMappable, 2>;
-export type TShort = MakeRefType<NonMappable, 3>;
-export type TInt = MakeRefType<Mappable, 4>;
-export type TLng = MakeRefType<Mappable, 5>;
-export type TBigInt = MakeRefType<Mappable, 6>;
-export type TDbl = MakeRefType<Mappable, 7>;
-export type TFlt = MakeRefType<Mappable, 8>;
-export type TBigDec = MakeRefType<Mappable, 9>;
-export type TStr = MakeRefType<Mappable, 10>;
-export type TArr = MakeRefType<Mappable, 11>;
-export type TObj = MakeRefType<Mappable, 12>;
-export type TRoot = MakeRefType<Mappable, 15>;
+export type TByte = {
+	kind: 2,
+	value: number
+}
 
-export type SickRef =
-	| TBigDec
-	| TBigInt
-	| TBit
-	| TByte
-	| TDbl
-	| TFlt
-	| TInt
-	| TLng
-	| TNul
-	| TRoot
-	| TShort;
+export type TShort = {
+	kind: 3,
+	value: number
+}
+
+export type TInt = {
+	kind: 4,
+	value: number
+}
+export type TLng = {
+	kind: 5,
+	value: number
+}
+
+export type TBigInt = {
+	kind: 6,
+	value: number
+}
+
+export type TDbl = {
+	kind: 7,
+	value: number
+}
+export type TFlt = {
+	kind: 8,
+	value: number
+}
+export type TBigDec = {
+	kind: 9,
+	value: number
+}
+export type TStr = {
+	kind: 10,
+	value: number
+}
+export type TArr = {
+	kind: 11,
+	value: number
+}
+export type TObj = {
+	kind: 12,
+	value: number
+}
+
+export type TRoot = {
+	kind: 15,
+	value: number
+}
+
+export type ObjEntry = {
+	key: number;
+	ref: SickRef
+}
+export type SickRoot = ObjEntry;
+
+export type SickRef = TArr | TBigDec | TBigInt | TBit | TByte | TDbl | TFlt | TInt | TLng | TNul | TObj | TRoot | TShort | TStr;
+
 export interface RefMappable<V> {
 	remap(value: V, mapping: Map<SickRef, SickRef>): V;
 }
 
 export function refRemap(ref: SickRef, remap: (ref: SickRef) => SickRef) {
 	switch (ref.kind) {
-		case "NonMappable": {
-			return ref;
-		}
-		case "Mappable": {
+		case 0: case 1: case 2:case 3:
 			return remap(ref);
+		default: {
+			return ref
 		}
 	}
 }
+
