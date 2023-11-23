@@ -29,7 +29,6 @@
 		"dev": "tsup --watch",
 		"format": "prettier \"**/*\" --ignore-unknown",
 		"lint": "eslint . .*js --max-warnings 0 --report-unused-disable-directives",
-		"prepare": "husky install",
 		"test": "vitest",
 		"tsc": "tsc"
 	},
@@ -47,7 +46,6 @@
 		"eslint-plugin-n": "^16.3.1",
 		"eslint-plugin-perfectionist": "^2.4.0",
 		"eslint-plugin-regexp": "^2.1.1",
-		"husky": "^8.0.3",
 		"lint-staged": "^15.1.0",
 		"prettier": "^3.1.0",
 		"prettier-plugin-curly": "^0.1.3",
